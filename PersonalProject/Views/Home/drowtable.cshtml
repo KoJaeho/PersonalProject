@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <title>Lesson2</title>
+    <style>
+        html {
+            width: 100%;
+        }
+
+        body {
+            width: 100%;
+        }
+
+        .squaerbox {
+            float: left;
+            width: 200px;
+            height: 200px;
+            border: 1px solid black;
+            text-align: center;
+            margin: 1px;
+        }
+
+        span {
+            position: relative;
+            top: 30%;
+            font-size: 50px;
+        }
+
+        .wrapper {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <input class="input_num" type="text" value="" placeholder="갯수를 입력하세요">
+        <button type="button" onclick="CreateTable()"> CREATE</button>
+        <button id="Sequental_color" type="button" onclick="Sequental_color()" disabled> Coloring</button>
+        <button id="RD_S_color" type="button" onclick="Random_Sequental_color()" disabled> RD Coloring</button>
+        <button id="reset" type="button" onclick="reset()" disabled> Reset</button>
+    </div>
+    <div id="contents"></div>
+</body>
+<script>
+		var intervalCnt = 0;
+		var interval = '';
+
+	  function CreateTable(){
+			var count_num = $(".input_num").val();
+			var tag = "";
+
+	    for(i=0;i<count_num;i++){
+	        tag += "<div class=\"squaerbox\"></div>";
+	    };
+	    $('#contents').html(tag);
+			$('#Sequental_color').removeAttr("disabled");
+			$('#RD_S_color').removeAttr("disabled");
+			$('#reset').removeAttr("disabled");
+
+	  }
+
+		function Sequental_color() {
+			interval = setInterval(function(){
+				console.log('interval call ' + intervalCnt); // (console에 interval 적용확인)
+				$($("#contents div")[intervalCnt]).css("background-color","red");
+				intervalCnt++;}, 1000);
+		}
+
+		function Random_Sequental_color() {
+			var count_num = $(".input_num").val();
+
+			interval = setInterval(function(){
+				var random_count = Math.floor((Math.random() * count_num) + 0);
+				console.log('interval call ' + random_count); // (console에 interval 적용확인)
+				$($("#contents div")[random_count]).css("background-color","red");
+				}, 1000);
+		}
+
+
+		function reset() {
+			clearInterval(interval);
+			$('#contents').html('');
+			$('#Sequental_color').attr("disabled", "disabled");
+			$('#RD_S_color').attr("disabled", "disabled");
+			$('#reset').attr("disabled", "disabled");
+			intervalCnt = 0;
+		}
+
+</script>
+</html>
+

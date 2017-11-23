@@ -12,5 +12,9 @@ namespace PersonalProject.Controllers
         {
             return View();
         }
+        public IActionResult drowtable()
+        {
+            return View();
+        }
     }
 }
